@@ -1,6 +1,6 @@
 <template >
   <div>
-    <input type="checkbox" :checked="todo.checked">
+    <input type="checkbox" :checked="todo.check">
     <span class="ml-3">{{ todo.text}}</span>
   </div>
 </template>
