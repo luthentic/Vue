@@ -1,8 +1,18 @@
 <template>
   <div>
     <h1>{{title}}</h1>  
-    <Modal :header="header" :text="text" theme="sale" />
+    <div v-if="showModal">
+      <Modal theme="sale" @close="toggleModal">
+        <template v-slot:links>
+          <a href="!">Sign up</a>
+          <a href="#">More Info</a>
+        </template>
+        <h1>LEE WELCOME</h1>
+        <p>Grab Your hands</p>
+      </Modal>
+    </div> 
   </div>
+  <button @click="toggleModal">Open Modal</button>
 </template>
 
 
@@ -16,11 +26,14 @@ export default {
     return {
       title:'LEE VUE PAGE',
       header:"SIGN UP FOR THE GIVEAWAY",
-      text:"LEEEEEE"
+      text:"LEEEEEE",
+      showModal:false
     }
   },
   methods: {
-
+    toggleModal(){
+      this.showModal = !this.showModal
+    }
   }
 }
 </script>
