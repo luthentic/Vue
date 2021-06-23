@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>{{title}}</h1>  
-    <Modal />
+    <Modal :header="header" :text="text" theme="sale" />
   </div>
 </template>
 
@@ -14,7 +14,9 @@ export default {
   components:{Modal},
   data(){
     return {
-      title:'LEE VUE PAGE'
+      title:'LEE VUE PAGE',
+      header:"SIGN UP FOR THE GIVEAWAY",
+      text:"LEEEEEE"
     }
   },
   methods: {
@@ -37,4 +39,5 @@ h1{
   display: inline-block;
   padding-bottom: 10px;
 }
+
 </style>
