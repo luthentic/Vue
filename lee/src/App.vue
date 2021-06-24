@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>{{title}}</h1>  
-    <div v-if="showModal">
+    <teleport to='.modals'  v-if="showModal">
       <Modal theme="sale" @close="toggleModal">
         <template v-slot:links>
           <a href="!">Sign up</a>
@@ -10,9 +10,16 @@
         <h1>LEE WELCOME</h1>
         <p>Grab Your hands</p>
       </Modal>
-    </div> 
+    </teleport>
+    <teleport to='.modals' v-if="showModal2">
+      <Modal theme="sale" @close="toggleModal2">
+        <h1>LEE WELCOME222</h1>
+        <p>Grab Your hands22</p>
+      </Modal>
+    </teleport>  
   </div>
   <button @click="toggleModal">Open Modal</button>
+  <button @click='toggleModal2'>Open Modal2</button>
 </template>
 
 
@@ -27,12 +34,16 @@ export default {
       title:'LEE VUE PAGE',
       header:"SIGN UP FOR THE GIVEAWAY",
       text:"LEEEEEE",
-      showModal:false
+      showModal:false,
+      showModal2:false
     }
   },
   methods: {
     toggleModal(){
       this.showModal = !this.showModal
+    },
+    toggleModal2(){
+      this.showModal2 = !this.showModal2
     }
   }
 }
