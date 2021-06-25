@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit.prevent="handleSubmit">
     <label>Email</label>
     <input type="email" required v-model="email">
 
@@ -12,9 +12,9 @@
     </select>
 
     <label>SKILLS:</label>
-    <input type="text" v-model="temSkill" @keyup.alt="addSkills">
+    <input type="text" v-model="temSkill" @keyup="addSkills">
     <div v-for="skill in skills" :key="skill" class="pill">
-      {{ skill }}
+      <span @click="deleteSkill(skill)">{{ skill }}</span>
     </div>
 
     <div class="terms">
@@ -22,17 +22,8 @@
       <label>Accept for the condition</label>
     </div>
 
-    <div>
-      <input type="checkbox" value="Lee1" v-model="names">
-      <label>Lee1</label>
-    </div>
-    <div>
-      <input type="checkbox" value="Lee2" v-model="names">
-      <label>Lee2</label>
-    </div>
-    <div>
-      <input type="checkbox" value="Lee3" v-model="names">
-      <label>Lee3</label>
+    <div class="submit">
+      <button>Create an Account</button>
     </div>
 
     <div>
@@ -43,7 +34,6 @@
   <p>Password:{{password}}</p>
   <p>Role: {{role}}</p>
   <p>Check:{{term}}</p>
-  <p>Nams:{{names}}</p>
 
 </template>
 
@@ -55,19 +45,26 @@ export default {
       password:'',
       role:'Role',
       term:true,
-      names:[],
       temSkill:'',
       skills:[]
     }
   },
   methods: {
     addSkills(e){
-      if(e.key === ',' && this.temSkill){
-        if(this.skills.includes(this.temSkill)){
+      if(e.keyCode === 13 && this.temSkill){
+        if(!this.skills.includes(this.temSkill)){
           this.skills.push(this.temSkill)
         }
         this.temSkill = ''
       }
+    },
+    deleteSkill(skill){
+      this.skills = this.skills.filter((item)=>{
+        return skill !== item
+      })
+    },
+    handleSubmit(){
+      console.log('form submit')
     }
   },
 }
@@ -105,5 +102,34 @@ export default {
     width: 10px;
     margin: 0 10px 0 0;
     position: relative;
+  }
+  .pill {
+    display: inline-block;
+    margin: 20px 10px 0 0;
+    padding: 6px 12px;
+    background: #eee;
+    border-radius: 20px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: #777;
+    cursor: pointer;
+  }
+  button {
+    background: #0b6dff;
+    border: 0;
+    padding: 10px 20px;
+    margin-top: 20px;
+    color: white;
+    border-radius: 20px;
+  }
+  .submit {
+    text-align: center;
+  }
+  .error {
+    color: #ff0062;
+    margin-top: 10px;
+    font-size: 0.8em;
+    font-weight: bold;
   }
 </style>
