@@ -1,33 +1,25 @@
 <template>
   <div class="home">
+    <input type="text" v-model="search">
+    <p>search term - {{search}}</p>
+    <div v-for="name in matchingNames" :key="name">{{name}}</div>
     
-    <p>{{aaa.name}} - {{aaa.age}}</p>
-    <button @click="updateClick">Click</button>
-
   </div>
   <router-view/>
 </template>
 
 <script>
-import {ref,reactive} from 'vue'
+import {ref,reactive, computed} from 'vue'
 export default {
   setup() {
-    
-    const p = ref(null)
+    const search = ref('')
+    const names = ref(['AEE','BEE','CEE','DEE','FEE'])
 
-    let name =  ref('LEE')
-    let age = ref(30)
-    let aaa = reactive({name:'LEE4', age:25})
+    const matchingNames = computed((name)=>{
+      return names.value.filter((name)=> name.includes(search.value))
+    })
 
-    const handleClick = () =>{
-      name.value = 'LEE2'
-      age.value = 'Heeelllo  LEE2'
-    }
-    const updateClick = () =>{
-      aaa.age = 40
-    }
-
-    return {name,age, handleClick, p,aaa, updateClick}
+    return {names, search, matchingNames}
   }
   }
 </script>
