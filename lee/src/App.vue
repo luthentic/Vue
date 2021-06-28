@@ -1,15 +1,15 @@
 <template>
   <div class="home">
-    <p ref="p">MY NAME IS {{name}} and my age is {{age}}</p>
-    <button @click="handleClick">Clcik</button>
-    <button @click="age++">add 1 to AGE</button>
-    <input type="text" v-model="name">
+    
+    <p>{{aaa.name}} - {{aaa.age}}</p>
+    <button @click="updateClick">Click</button>
+
   </div>
   <router-view/>
 </template>
 
 <script>
-import {ref} from 'vue'
+import {ref,reactive} from 'vue'
 export default {
   setup() {
     
@@ -17,13 +17,17 @@ export default {
 
     let name =  ref('LEE')
     let age = ref(30)
+    let aaa = reactive({name:'LEE4', age:25})
 
     const handleClick = () =>{
       name.value = 'LEE2'
       age.value = 'Heeelllo  LEE2'
     }
+    const updateClick = () =>{
+      aaa.age = 40
+    }
 
-    return {name,age, handleClick, p}
+    return {name,age, handleClick, p,aaa, updateClick}
   }
   }
 </script>
