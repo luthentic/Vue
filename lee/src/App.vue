@@ -1,32 +1,35 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link :to="{name: 'About'}">About</router-link>
-    <router-link :to="{name:'Job'}">Job</router-link>
+  <div class="home">
+    <p ref="p">MY NAME IS {{name}} and my age is {{age}}</p>
+    <button @click="handleClick">Clcik</button>
+    <button @click="age++">add 1 to AGE</button>
+    <input type="text" v-model="name">
   </div>
-
-  <button @click="redirect">Redirect</button>
-  <button @click="back">Go back</button>
-  <button @click="forward">Go forward</button>
-
   <router-view/>
 </template>
 
 <script>
+import {ref} from 'vue'
 export default {
-  methods: {
-    redirect(){
-      this.$router.push({name:'Home'})
-    },
-    back(){
-      this.$router.go(-1)
-    },
-    forward(){
-      this.$router.go(1)
+  setup() {
+    
+    const p = ref(null)
+
+    let name =  ref('LEE')
+    let age = ref(30)
+
+    const handleClick = () =>{
+      name.value = 'LEE2'
+      age.value = 'Heeelllo  LEE2'
     }
-  },
-}
+
+    return {name,age, handleClick, p}
+  }
+  }
 </script>
+
+
+
 
 <style>
 #app {
@@ -44,19 +47,9 @@ export default {
 #nav a {
   font-weight: bold;
   color: #2c3e50;
-  text-decoration: none;
-  padding: 10px;
-  border-radius: 4PX;
 }
 
 #nav a.router-link-exact-active {
-  color: white;
-  background: crimson;
-}
-button{
-  margin: 0 10px;
-  padding: 10px;
-  border:none;
-  border-radius: 4px;
+  color: #42b983;
 }
 </style>
